@@ -9,7 +9,6 @@ import { createBrowserPool, getFreeBrowser, releaseBrowser } from '../discordAPI
 async function processQueue(bot: any) {
     let browser = getFreeBrowser();
     while (!browser) {
-        // Пауза перед повторной проверкой доступности браузера
         await new Promise(resolve => setTimeout(resolve, 1000));
         browser = getFreeBrowser();
     }
