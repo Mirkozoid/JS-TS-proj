@@ -6,8 +6,10 @@ export async function automateDiscordMessaging(message: string, page: any) {
     await new Promise(r => setTimeout(r, 10000));
     await page.click('div[data-slate-node="element"]');
     await page.keyboard.type('/genie ');
+    await page.keyboard.press('Space');
     await new Promise(r => setTimeout(r, 2000));
     await page.keyboard.type(` ${message}`);
+    await new Promise(r => setTimeout(r, 2000));
     await page.keyboard.press('Enter');
     await new Promise(r => setTimeout(r, 5000));
 

@@ -15,7 +15,8 @@ export async function removeFromQueue(remove = false) {
             await queue.deleteOne({ _id: item._id });
             console.log('Элемент удален из очереди');
         }
-        return item.value;
+        console.log(item);
+        return item;
     }
     return null;
 }

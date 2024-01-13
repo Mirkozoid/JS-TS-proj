@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import { login } from './login';
 
-export const POOL_SIZE = 1;
+export const POOL_SIZE = 2;
 let browsers: any[] = [];
 
 export async function createBrowserPool() {
