@@ -1,29 +1,8 @@
-import puppeteer from 'puppeteer';
-import { Url, Password, Email } from '../config/env';
+import { Url } from "../config/env";
 
-let page: any;
 let imgLinks: string[] = [];
 
-export async function startBrowserAndLogin() {
-    const browser = await puppeteer.launch({
-        headless: false,
-        executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'
-    });
-    page = await browser.newPage();
-
-    await page.goto(Url);
-    await new Promise(r => setTimeout(r, 10000));
-
-    await page.type('input[name="email"]', Email);
-    await new Promise(r => setTimeout(r, 2000));
-    await page.type('input[name="password"]', Password);
-    await new Promise(r => setTimeout(r, 2000));
-    await page.click('button[type="submit"]');
-
-    await page.waitForNavigation();
-}
-
-export async function automateDiscordMessaging(message: string) {
+export async function automateDiscordMessaging(message: string, page: any) {
     await new Promise(r => setTimeout(r, 10000));
     await page.click('div[data-slate-node="element"]');
     await page.keyboard.type('/genie ');
@@ -62,6 +41,7 @@ export async function automateDiscordMessaging(message: string) {
                     const imgs = Array.from(document.querySelectorAll('div.flex img')) as HTMLImageElement[];
                     return imgs.map(img => img.src);
                 });
+                await page.goto(Url);
             }
         } else {
             console.log('Ошибка: Кнопка "View / Download" не найдена');
@@ -69,5 +49,6 @@ export async function automateDiscordMessaging(message: string) {
     } else {
         console.log('Ошибка: Сообщение не найдено');
     }
+    console.log('Автоматизация обмена сообщениями в Discord выполнена');
     return imgLinks;
 }
